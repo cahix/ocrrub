@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:ocrrub/src/mainframe/mlkit/ml_kit_view.dart';
+import 'package:ocrrub/src/view/mainframe/mlkit/text_blocker_view.dart';
+import 'package:ocrrub/src/view/mainframe/mlkit/text_detector_view.dart';
 
-import 'mainframe/menu_item_list_view.dart';
-import 'settings/settings_controller.dart';
-import 'settings/settings_view.dart';
+import '../view/mainframe/menu_item_list_view.dart';
+import '../view/settings/settings_controller.dart';
+import '../view/settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -45,8 +46,10 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  case MlKitVIew.routeName:
-                    return const MlKitVIew();
+                  case TextDetectorView.routeName:
+                    return TextDetectorView();
+                  case TextBlockerView.routeName:
+                    return TextBlockerView();
                   case MenuItemListView.routeName:
                   default:
                     return const MenuItemListView();

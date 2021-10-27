@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ocrrub/src/settings/settings_view.dart';
+import 'package:ocrrub/src/view/settings/settings_view.dart';
 
 class DefaultScaffold extends StatelessWidget {
   final String title;

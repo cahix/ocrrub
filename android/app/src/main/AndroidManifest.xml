@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ocrrub">
-   <application
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <application
         android:label="ocrrub"
         android:icon="@mipmap/ic_launcher">
         <activity
