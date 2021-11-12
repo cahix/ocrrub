@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ocrrub/src/view/mainframe/mlkit/object_detector_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_blocker_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_detector_view.dart';
 import 'package:ocrrub/src/view/widgets/default_scaffold.dart';
 
-import '../settings/settings_view.dart';
 import 'menu_item.dart';
 
 class MenuItemListView extends StatelessWidget {
@@ -13,6 +13,7 @@ class MenuItemListView extends StatelessWidget {
     this.items = const [
       MenuItem(TextDetectorView.routeName, name: 'Text Detector'),
       MenuItem(TextBlockerView.routeName, name: 'Text Blocker'),
+      MenuItem(ObjectDetectorView.routeName, name: 'Object Detector'),
     ],
   }) : super(key: key);
 

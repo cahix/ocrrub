@@ -3,7 +3,6 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/painters/text_blocker_painter.dart';
 
 import 'camera_view.dart';
-import 'painters/text_detector_painter.dart';
 
 class TextBlockerView extends StatefulWidget {
   static const String routeName = '/textblocker';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ocrrub/src/view/mainframe/mlkit/object_detector_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_blocker_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_detector_view.dart';
 
@@ -50,6 +51,8 @@ class MyApp extends StatelessWidget {
                     return TextDetectorView();
                   case TextBlockerView.routeName:
                     return TextBlockerView();
+                  case ObjectDetectorView.routeName:
+                    return ObjectDetectorView();
                   case MenuItemListView.routeName:
                   default:
                     return const MenuItemListView();

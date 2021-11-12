@@ -60,42 +60,27 @@ class _CameraViewState extends State<CameraView> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: _switchScreenMode,
-              child: Icon(
-                _mode == ScreenMode.liveFeed
-                    ? Icons.photo_library_outlined
-                    : (Platform.isIOS
-                    ? Icons.camera_alt_outlined
-                    : Icons.camera),
-              ),
-            ),
-          ),
+          _switchScreenModeSetting(),
         ],
       ),
       body: _body(),
-      //floatingActionButton: _floatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
-  Widget? _floatingActionButton() {
-    if (_mode == ScreenMode.gallery) return null;
-    if (cameras.length == 1) return null;
-    return SizedBox(
-        height: 70.0,
-        width: 70.0,
-        child: FloatingActionButton(
-          child: Icon(
-            Platform.isIOS
-                ? Icons.flip_camera_ios_outlined
-                : Icons.flip_camera_android_outlined,
-            size: 40,
-          ),
-          onPressed: _switchLiveCamera,
-        ));
+  Widget _switchScreenModeSetting() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: GestureDetector(
+        onTap: _switchScreenMode,
+        child: Icon(
+          _mode == ScreenMode.liveFeed
+              ? Icons.photo_library_outlined
+              : (Platform.isIOS
+              ? Icons.camera_alt_outlined
+              : Icons.camera),
+        ),
+      ),
+    );
   }
 
   Widget _body() {
@@ -224,7 +209,7 @@ class _CameraViewState extends State<CameraView> {
 
   Future _stopLiveFeed() async {
     await _controller?.stopImageStream();
-    await _controller?.dispose();
+ //   await _controller?.dispose();
     _controller = null;
   }
 
