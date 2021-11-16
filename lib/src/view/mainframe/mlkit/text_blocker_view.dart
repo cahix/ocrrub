@@ -24,7 +24,7 @@ class _TextBlockerViewState extends State<TextBlockerView> {
 
   @override
   Widget build(BuildContext context) {
-    return CameraView(
+    return CameraViewOld(
       title: 'Text Blocker',
       customPaint: customPaint,
       onImage: (inputImage) {

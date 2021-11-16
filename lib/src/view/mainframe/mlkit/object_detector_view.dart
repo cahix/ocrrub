@@ -36,11 +36,10 @@ class _ObjectDetectorView extends State<ObjectDetectorView> {
 
   @override
   Widget build(BuildContext context) {
-    return CameraView(
+    return CameraViewOld(
       title: 'Object Detector',
       customPaint: customPaint,
       onImage: processImage,
-      onActionButton: takeImage,
       initialDirection: CameraLensDirection.back,
     );
   }

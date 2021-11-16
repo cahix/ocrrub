@@ -5,7 +5,7 @@ import 'camera_view.dart';
 import 'painters/text_detector_painter.dart';
 
 class TextDetectorView extends StatefulWidget {
-  static const String routeName = '/textDetectorView';
+  static const String routeName = 'textdetectorview';
 
   @override
   _TextDetectorViewState createState() => _TextDetectorViewState();
@@ -24,15 +24,17 @@ class _TextDetectorViewState extends State<TextDetectorView> {
 
   @override
   Widget build(BuildContext context) {
-    return CameraView(
+    return CameraViewOld(
       title: 'Text Detector',
       customPaint: customPaint,
-      onImage: processImage,
+      onImage: (inputImage) {
+        processImage(inputImage);
+      },
     );
   }
 
   Future<void> processImage(InputImage inputImage) async {
-   // if (isBusy) return;
+    if (isBusy) return;
     isBusy = true;
     final recognisedText = await textDetector.processImage(inputImage);
     print('Found ${recognisedText.blocks.length} textBlocks');
