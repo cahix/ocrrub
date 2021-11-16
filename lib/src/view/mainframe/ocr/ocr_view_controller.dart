@@ -1,6 +1,7 @@
-import 'dart:ui' as ui;
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui' as ui;
+import 'dart:ui';
 
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/services.dart';
@@ -13,14 +14,14 @@ import 'package:ocrrub/src/view/widgets/smart_change_notifier.dart';
 class OCRViewController extends SmartChangeNotifier {
   bool isBusy = false;
   TextDetector textDetector = GoogleMlKit.vision.textDetector();
-  String? imagePath;
+  String? currentImagePath;
   CustomPainter? customPainter;
 
   Future<void> startOCR() async {
     if (isBusy) return;
-    if (imagePath == null) return;
+    if (currentImagePath == null) return;
     isBusy = true;
-    final inputImage = InputImage.fromFilePath(imagePath!);
+    final inputImage = InputImage.fromFilePath(currentImagePath!);
     final recognisedText = await textDetector.processImage(inputImage);
     _onTextRecognised(recognisedText);
     if(recognisedText.blocks.length > 0)
@@ -43,9 +44,9 @@ class OCRViewController extends SmartChangeNotifier {
   }
 
   void _setPaint(RecognisedText recognisedText) async {
-    if(imagePath == null) return;
+    if(currentImagePath == null) return;
     Completer<ui.Image> completer = new Completer<ui.Image>();
-    Image.file(File(imagePath!),).image
+    Image.file(File(currentImagePath!),).image
         .resolve(new ImageConfiguration())
         .addListener(ImageStreamListener((ImageInfo info, bool _) {
       completer.complete(info.image);
@@ -59,11 +60,11 @@ class OCRViewController extends SmartChangeNotifier {
 
   Future<void> getImage(BuildContext context) async {
     try {
-      imagePath = (await EdgeDetection.detectEdge);
-      print("$imagePath");
+      currentImagePath = await EdgeDetection.detectEdge;
+      print("$currentImagePath");
     } on PlatformException catch (e) {
       showSnackbar(e.toString());
-      imagePath = null;
+      currentImagePath = null;
     }
     notifyListeners();
   }

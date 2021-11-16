@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ocrrub/src/view/mainframe/ocr/image_view.dart';
 import 'package:ocrrub/src/view/mainframe/ocr/ocr_view_controller.dart';
-import 'package:ocrrub/src/view/widgets/provider_view.dart';
 import 'package:provider/src/provider.dart';
-
-
-class OCRViewBuilder extends StatelessWidget {
-  const OCRViewBuilder({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return ProviderView<OCRViewController>(
-        provider: OCRViewController(),
-        child: OCRView(),
-    );
-  }
-}
 
 class OCRView extends StatefulWidget {
   static const String routeName = '/ocrview';
@@ -56,7 +43,7 @@ class _OCRViewState extends State<OCRView> {
                 ),
                 SizedBox(height: 16),
                 ImageView(
-                  imagePath: _controller.imagePath,
+                  imagePath: _controller.currentImagePath,
                   customPainter: _controller.customPainter,
                 ),
               ],
@@ -75,17 +62,11 @@ class _OCRViewState extends State<OCRView> {
 
   Widget _ocrButton() {
     return Visibility(
-      visible: _controller.imagePath != null,
+      visible: _controller.currentImagePath != null,
       child: ElevatedButton(
         onPressed: () => _controller.startOCR(),
         child: Text('OCR'),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

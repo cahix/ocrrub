@@ -2,7 +2,6 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:ocrrub/src/view/mainframe/ocr/my_painter.dart';
 import 'package:ocrrub/src/view/widgets/emty_widget.dart';
 
 class ImageView extends StatelessWidget {

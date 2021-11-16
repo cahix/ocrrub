@@ -4,7 +4,6 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit2/camera_view_controller.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit2/image_preview.dart';
-import 'package:ocrrub/src/view/widgets/material_banner.dart';
 
 import 'camera_view.dart';
 import 'converter.dart';
