@@ -30,7 +30,7 @@ class CameraView extends StatefulWidget {
 }
 
 class _CameraViewState extends State<CameraView> {
-  ScreenMode _mode = ScreenMode.gallery;
+  ScreenMode _mode = ScreenMode.liveFeed;
   CameraController? _controller;
   File? _image;
   ImagePicker? _imagePicker;
@@ -40,7 +40,6 @@ class _CameraViewState extends State<CameraView> {
   @override
   void initState() {
     super.initState();
-
     _imagePicker = ImagePicker();
     for (var i = 0; i < cameras.length; i++) {
       if (cameras[i].lensDirection == widget.initialDirection) {
