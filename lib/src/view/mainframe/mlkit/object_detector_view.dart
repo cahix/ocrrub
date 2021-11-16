@@ -50,7 +50,7 @@ class _ObjectDetectorView extends State<ObjectDetectorView> {
           builder: (_) => TextPreview(inputImage: currentInputImage,)));
     }
     else {
-      showSnackbar(context, 'Please detect an Object.');
+      showSnackbar('Please detect an Object.');
     }
   }
 

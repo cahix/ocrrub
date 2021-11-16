@@ -6,6 +6,7 @@ import 'src/view/settings/settings_controller.dart';
 import 'src/view/settings/settings_service.dart';
 
 List<CameraDescription> cameras = [];
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   final settingsController = SettingsController(SettingsService());
