@@ -15,12 +15,14 @@ class CameraView extends StatefulWidget {
         required this.title,
         required this.customPaint,
         required this.onImage,
+        this.onActionButton,
         this.initialDirection = CameraLensDirection.back})
       : super(key: key);
 
   final String title;
   final CustomPaint? customPaint;
   final Function(InputImage inputImage) onImage;
+  final Function()? onActionButton;
   final CameraLensDirection initialDirection;
 
   @override
@@ -28,7 +30,7 @@ class CameraView extends StatefulWidget {
 }
 
 class _CameraViewState extends State<CameraView> {
-  ScreenMode _mode = ScreenMode.liveFeed;
+  ScreenMode _mode = ScreenMode.gallery;
   CameraController? _controller;
   File? _image;
   ImagePicker? _imagePicker;
@@ -45,7 +47,7 @@ class _CameraViewState extends State<CameraView> {
         _cameraIndex = i;
       }
     }
-    _startLiveFeed();
+    if(_mode == ScreenMode.liveFeed) _startLiveFeed();
   }
 
   @override
@@ -64,7 +66,34 @@ class _CameraViewState extends State<CameraView> {
         ],
       ),
       body: _body(),
+      floatingActionButton: _takeImageButton(),
     );
+  }
+
+  void _switchScreenMode() async {
+    if (_mode == ScreenMode.liveFeed) {
+      await _stopLiveFeed();
+      _mode = ScreenMode.gallery;
+    } else {
+      await _startLiveFeed();
+      _mode = ScreenMode.liveFeed;
+    }
+    setState(() {});
+  }
+
+  Widget? _takeImageButton() {
+    if (_mode == ScreenMode.gallery) return null;
+    if (cameras.length == 1) return null;
+    return Container(
+        height: 70.0,
+        width: 70.0,
+        child: FloatingActionButton(
+          child: Icon(
+            Icons.camera,
+            size: 40,
+          ),
+          onPressed: widget.onActionButton
+        ));
   }
 
   Widget _switchScreenModeSetting() {
@@ -84,13 +113,11 @@ class _CameraViewState extends State<CameraView> {
   }
 
   Widget _body() {
-    Widget body;
     if (_mode == ScreenMode.liveFeed) {
-      body = _liveFeedBody();
+      return _liveFeedBody();
     } else {
-      body = _galleryBody();
+      return _galleryBody();
     }
-    return body;
   }
 
   Widget _liveFeedBody() {
@@ -163,8 +190,8 @@ class _CameraViewState extends State<CameraView> {
     ]);
   }
 
-  Future _getImage(ImageSource source) async {
-    final pickedFile = await _imagePicker?.getImage(source: source);
+  Future<void> _getImage(ImageSource source) async {
+    final pickedFile = await _imagePicker?.pickImage(source: source);
     if (pickedFile != null) {
       _processPickedFile(pickedFile);
     } else {
@@ -173,18 +200,7 @@ class _CameraViewState extends State<CameraView> {
     setState(() {});
   }
 
-  void _switchScreenMode() async {
-    if (_mode == ScreenMode.liveFeed) {
-      _mode = ScreenMode.gallery;
-      await _stopLiveFeed();
-    } else {
-      _mode = ScreenMode.liveFeed;
-      await _startLiveFeed();
-    }
-    setState(() {});
-  }
-
-  Future _startLiveFeed() async {
+  Future<void> _startLiveFeed() async {
     final camera = cameras[_cameraIndex];
     _controller = CameraController(
       camera,
@@ -207,31 +223,29 @@ class _CameraViewState extends State<CameraView> {
     });
   }
 
-  Future _stopLiveFeed() async {
+  Future<void> _stopLiveFeed() async {
     await _controller?.stopImageStream();
  //   await _controller?.dispose();
     _controller = null;
   }
 
-  Future _switchLiveCamera() async {
-    if (_cameraIndex == 0) {
-      _cameraIndex = 1;
-    } else {
-      _cameraIndex = 0;
-    }
-    await _stopLiveFeed();
-    await _startLiveFeed();
-  }
-
-  Future _processPickedFile(PickedFile pickedFile) async {
+  Future<void> _processPickedFile(XFile pickedFile) async {
     setState(() {
       _image = File(pickedFile.path);
     });
-    final inputImage = InputImage.fromFilePath(pickedFile.path);
+    final img = Image.file(_image!);
+    final bytes = await pickedFile.readAsBytes();
+    final inputImageData = InputImageData(
+      size: Size(55, 55),
+      imageRotation: InputImageRotation.Rotation_0deg,
+      inputImageFormat: InputImageFormat.NV21,
+      planeData: null,
+    );
+    final inputImage = InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
     widget.onImage(inputImage);
   }
 
-  Future _processCameraImage(CameraImage image) async {
+  Future<void> _processCameraImage(CameraImage image) async {
     final WriteBuffer allBytes = WriteBuffer();
     for (Plane plane in image.planes) {
       allBytes.putUint8List(plane.bytes);

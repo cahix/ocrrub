@@ -27,14 +27,12 @@ class _TextDetectorViewState extends State<TextDetectorView> {
     return CameraView(
       title: 'Text Detector',
       customPaint: customPaint,
-      onImage: (inputImage) {
-        processImage(inputImage);
-      },
+      onImage: processImage,
     );
   }
 
   Future<void> processImage(InputImage inputImage) async {
-    if (isBusy) return;
+   // if (isBusy) return;
     isBusy = true;
     final recognisedText = await textDetector.processImage(inputImage);
     print('Found ${recognisedText.blocks.length} textBlocks');

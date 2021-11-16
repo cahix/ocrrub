@@ -1,6 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:ocrrub/src/view/mainframe/mlkit/text_preview.dart';
+import 'package:ocrrub/src/view/widgets/material_banner.dart';
 
 import 'camera_view.dart';
 import 'painters/object_detector_painter.dart';
@@ -14,6 +16,7 @@ class ObjectDetectorView extends StatefulWidget {
 
 class _ObjectDetectorView extends State<ObjectDetectorView> {
   late ObjectDetector objectDetector;
+  InputImage? currentInputImage;
 
   @override
   void initState() {
@@ -36,28 +39,38 @@ class _ObjectDetectorView extends State<ObjectDetectorView> {
     return CameraView(
       title: 'Object Detector',
       customPaint: customPaint,
-      onImage: (inputImage) {
-        processImage(inputImage);
-      },
+      onImage: processImage,
+      onActionButton: takeImage,
       initialDirection: CameraLensDirection.back,
     );
+  }
+
+  void takeImage() {
+    if(currentInputImage != null) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (_) => TextPreview(inputImage: currentInputImage,)));
+    }
+    else {
+      showSnackbar(context, 'Please detect an Object.');
+    }
   }
 
   Future<void> processImage(InputImage inputImage) async {
     if (isBusy) return;
     isBusy = true;
     final result = await objectDetector.processImage(inputImage);
-    print(result);
     customPaint = null;
     if (inputImage.inputImageData?.size != null &&
         inputImage.inputImageData?.imageRotation != null &&
         result.length > 0) {
+      currentInputImage = inputImage;
       final painter = ObjectDetectorPainter(
           result,
           inputImage.inputImageData!.imageRotation,
           inputImage.inputImageData!.size);
       customPaint = CustomPaint(painter: painter);
     } else {
+      currentInputImage = null;
       customPaint = null;
     }
     isBusy = false;

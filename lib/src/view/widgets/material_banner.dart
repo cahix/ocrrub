@@ -14,3 +14,7 @@ void showMaterialBanner(BuildContext context, String title) {
         ],
       ));
 }
+
+void showSnackbar(BuildContext context, String title) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(title),));
+}
