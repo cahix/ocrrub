@@ -1,18 +1,20 @@
-
+import 'dart:ui' as ui;
+import 'dart:async';
 import 'dart:io';
 
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
-import 'package:ocrrub/src/view/mainframe/mlkit/painters/text_detector_painter.dart';
+import 'package:ocrrub/src/view/mainframe/ocr/my_painter.dart';
 import 'package:ocrrub/src/view/widgets/material_banner.dart';
+import 'package:ocrrub/src/view/widgets/smart_change_notifier.dart';
 
-class OCRViewController with ChangeNotifier {
+class OCRViewController extends SmartChangeNotifier {
   bool isBusy = false;
   TextDetector textDetector = GoogleMlKit.vision.textDetector();
   String? imagePath;
-  CustomPaint? customPaint;
+  CustomPainter? customPainter;
 
   Future<void> startOCR() async {
     if (isBusy) return;
@@ -36,19 +38,23 @@ class OCRViewController with ChangeNotifier {
       showMaterialBannerForText(text);
     }
     else {
-      customPaint = null;
+      customPainter = null;
     }
   }
 
-  void _setPaint(RecognisedText recognisedText) {
+  void _setPaint(RecognisedText recognisedText) async {
     if(imagePath == null) return;
-    final img = Image.file(File(imagePath!),);
-    if(img.width == null || img.height == null) return;
-    final painter = TextDetectorPainter(
+    Completer<ui.Image> completer = new Completer<ui.Image>();
+    Image.file(File(imagePath!),).image
+        .resolve(new ImageConfiguration())
+        .addListener(ImageStreamListener((ImageInfo info, bool _) {
+      completer.complete(info.image);
+    }));
+    final newImg = await completer.future;
+    customPainter = MyPainter(
         recognisedText,
-        Size(img.width!, img.height!),
-        InputImageRotation.Rotation_0deg);
-    customPaint = CustomPaint(painter: painter);
+        Size(newImg.width.toDouble(), newImg.height.toDouble()),);
+    notifyListeners();
   }
 
   Future<void> getImage(BuildContext context) async {
@@ -60,5 +66,11 @@ class OCRViewController with ChangeNotifier {
       imagePath = null;
     }
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    textDetector.close();
+    super.dispose();
   }
 }

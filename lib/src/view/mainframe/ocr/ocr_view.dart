@@ -55,7 +55,10 @@ class _OCRViewState extends State<OCRView> {
                   ],
                 ),
                 SizedBox(height: 16),
-                ImageView(imagePath: _controller.imagePath, customPaint: _controller.customPaint,),
+                ImageView(
+                  imagePath: _controller.imagePath,
+                  customPainter: _controller.customPainter,
+                ),
               ],
             ),
           ),
@@ -78,5 +81,11 @@ class _OCRViewState extends State<OCRView> {
         child: Text('OCR'),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
