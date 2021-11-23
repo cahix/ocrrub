@@ -13,31 +13,41 @@ import 'widgets/my_painter.dart';
 
 class OCRViewController extends SmartChangeNotifier {
   TextDetector textDetector = GoogleMlKit.vision.textDetector();
+  PageController pageController = PageController();
   String? currentImagePath;
   CustomPainter? customPainter;
+  String? ocrText;
 
-  Future<void> startOCR({String? expected}) async {
+  void reset() {
+    currentImagePath = null;
+    customPainter = null;
+    ocrText = null;
+  }
+
+  Future<void> scan() async {
+    reset();
+    await _getImage();
+    if(currentImagePath != null) {
+      await _startOCR();
+    }
+    notifyListeners();
+    if(ocrText != null) {
+      pageController.animateToPage(1, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+    }
+  }
+
+  Future<void> _startOCR() async {
     if (currentImagePath == null) return;
     final inputImage = InputImage.fromFilePath(currentImagePath!);
     final recognisedText = await textDetector.processImage(inputImage);
-    _onTextRecognised(recognisedText, expected: expected);
-    if (recognisedText.blocks.length > 0) notifyListeners();
+    _onTextRecognised(recognisedText);
   }
 
-  void _onTextRecognised(RecognisedText recognisedText, {String? expected}) {
+  void _onTextRecognised(RecognisedText recognisedText) {
     final blocks = recognisedText.blocks;
-    print('Found ${recognisedText.blocks.length} textBlocks');
     if (blocks.length > 0) {
       _setPaint(recognisedText);
-      if (expected != null) {
-        showMaterialBannerTextDiff(expected, recognisedText.text);
-      } else {
-        String text = '';
-        for (var block in blocks) {
-          text += block.text + "\n";
-        }
-        showMaterialBannerText(text);
-      }
+      ocrText = recognisedText.text;
     } else {
       showSnackbar('No text recognized');
       customPainter = null;
@@ -54,8 +64,7 @@ class OCRViewController extends SmartChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getImage(BuildContext context) async {
-    customPainter = null;
+  Future<void> _getImage() async {
     try {
       currentImagePath = await EdgeDetection.detectEdge;
       print("$currentImagePath");
@@ -63,7 +72,6 @@ class OCRViewController extends SmartChangeNotifier {
       showSnackbar(e.toString());
       currentImagePath = null;
     }
-    notifyListeners();
   }
 
   @override

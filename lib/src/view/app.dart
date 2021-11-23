@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ocrrub/main.dart';
 import 'package:ocrrub/src/view/common.dart';
-import 'package:ocrrub/src/view/global_providers.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/object_detector_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_blocker_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_detector_view.dart';
@@ -19,7 +18,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final settingsController = context.watch<SettingsController>();
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           restorationScopeId: 'app',
