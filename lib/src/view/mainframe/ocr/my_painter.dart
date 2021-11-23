@@ -15,11 +15,12 @@ class MyPainter extends CustomPainter {
     Rect scaleRect(TextBlock block) {
       return Rect.fromLTRB(
         block.rect.left * scaleX,
-        block.rect.top* scaleY,
+        block.rect.top * scaleY,
         block.rect.right * scaleX,
-        block.rect.bottom* scaleY,
+        block.rect.bottom * scaleY,
       );
     }
+
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
       ..color = Colors.blueAccent

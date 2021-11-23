@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:ocrrub/src/view/mainframe/ocr/image_view.dart';
 import 'package:ocrrub/src/view/mainframe/ocr/ocr_view_controller.dart';
-import 'package:provider/src/provider.dart';
+
+import '../../common.dart';
 
 class OCRView extends StatefulWidget {
   static const String routeName = '/ocrview';
@@ -24,32 +24,32 @@ class _OCRViewState extends State<OCRView> {
   Widget build(BuildContext context) {
     context.watch<OCRViewController>();
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('OCR'),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _scanButton(),
-                    _ocrButton(),
-                  ],
-                ),
-                SizedBox(height: 16),
-                ImageView(
-                  imagePath: _controller.currentImagePath,
-                  customPainter: _controller.customPainter,
-                ),
-              ],
-            ),
+      appBar: AppBar(
+        title: const Text('OCR'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _scanButton(),
+                  _ocrButton(),
+                ],
+              ),
+              SizedBox(height: 16),
+              ImageView(
+                imagePath: _controller.currentImagePath,
+                customPainter: _controller.customPainter,
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 

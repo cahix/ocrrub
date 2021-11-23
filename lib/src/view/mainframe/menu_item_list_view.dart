@@ -26,26 +26,25 @@ class MenuItemListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
-        title: AppLocalizations.of(context)!.appTitle,
-        body: ListView.builder(
-          restorationId: 'sampleItemListView',
-          itemCount: items.length,
-          itemBuilder: (BuildContext context, int index) {
-            final item = items[index];
-            return ListTile(
-                title: Text(item.name ?? ''),
-                leading: const CircleAvatar(
-                  foregroundImage: AssetImage('assets/images/flutter_logo.png'),
-                ),
-                onTap: () {
-                  Navigator.restorablePushNamed(
-                    context,
-                    item.targetRouteName,
-                  );
-                }
-            );
-          },
-        ),
+      title: AppLocalizations.of(context)!.appTitle,
+      body: ListView.builder(
+        restorationId: 'sampleItemListView',
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          final item = items[index];
+          return ListTile(
+              title: Text(item.name ?? ''),
+              leading: const CircleAvatar(
+                foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+              ),
+              onTap: () {
+                Navigator.restorablePushNamed(
+                  context,
+                  item.targetRouteName,
+                );
+              });
+        },
+      ),
     );
   }
 }

@@ -15,18 +15,17 @@ class DefaultScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
-            },
-          ),
-        ],
-      ),
-      body: body
-    );
+        appBar: AppBar(
+          title: Text(title),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.restorablePushNamed(context, SettingsView.routeName);
+              },
+            ),
+          ],
+        ),
+        body: body);
   }
 }

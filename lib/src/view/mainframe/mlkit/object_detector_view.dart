@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_preview.dart';
-import 'package:ocrrub/src/view/widgets/material_banner.dart';
+import 'package:ocrrub/src/view/widgets/scaffold_messenger.dart';
 
 import 'camera_view.dart';
 import 'painters/object_detector_painter.dart';
@@ -45,11 +45,12 @@ class _ObjectDetectorView extends State<ObjectDetectorView> {
   }
 
   void takeImage() {
-    if(currentInputImage != null) {
+    if (currentInputImage != null) {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (_) => TextPreview(inputImage: currentInputImage,)));
-    }
-    else {
+          builder: (_) => TextPreview(
+                inputImage: currentInputImage,
+              )));
+    } else {
       showSnackbar('Please detect an Object.');
     }
   }

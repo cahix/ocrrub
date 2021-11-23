@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:camera/camera.dart';
@@ -28,13 +27,16 @@ class _ImagePreviewState extends State<ImagePreview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(child: RotatedBox(quarterTurns: 1, child: _imageView())),
+      body: Center(child: RotatedBox(quarterTurns: 1, child: _imageView())),
     );
   }
 
   Widget _imageView() {
     final rect = widget.rect;
     final img = widget.image as imglib.Image;
-    return RotatedBox(quarterTurns: 1, child: widget.image,);
+    return RotatedBox(
+      quarterTurns: 1,
+      child: widget.image,
+    );
   }
 }

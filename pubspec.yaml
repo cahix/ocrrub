@@ -20,6 +20,8 @@ dependencies:
   provider: ^6.0.1
   image: ^3.0.8
   edge_detection: ^1.0.7
+  flutter_lorem: ^2.0.0
+  pretty_diff_text: ^1.0.0
 
 dev_dependencies:
   flutter_test:

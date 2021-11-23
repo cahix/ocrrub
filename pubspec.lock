@@ -85,6 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  diff_match_patch:
+    dependency: transitive
+    description:
+      name: diff_match_patch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
   edge_detection:
     dependency: "direct main"
     description:
@@ -116,6 +123,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_lorem:
+    dependency: "direct main"
+    description:
+      name: flutter_lorem
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -252,6 +266,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
+  pretty_diff_text:
+    dependency: "direct main"
+    description:
+      name: pretty_diff_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   provider:
     dependency: "direct main"
     description:

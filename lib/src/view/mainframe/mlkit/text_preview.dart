@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
@@ -20,9 +19,9 @@ class _TextPreviewState extends State<TextPreview> {
   }
 
   Widget _body() {
-    if(widget.inputImage?.bytes != null) {
+    if (widget.inputImage?.bytes != null) {
       return Center(child: Image.memory(widget.inputImage!.bytes!));
-    }
-    else return Container();
+    } else
+      return Container();
   }
 }

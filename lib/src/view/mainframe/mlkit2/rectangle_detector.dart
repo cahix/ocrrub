@@ -9,7 +9,6 @@ import 'camera_view.dart';
 import 'converter.dart';
 import 'painters/object_detector_painter.dart';
 
-
 class RectangleDetector extends StatefulWidget {
   static const String routeName = '/rectangledetectorroutename';
 
@@ -42,8 +41,8 @@ class _ObjectDetectorView extends State<RectangleDetector> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => CameraViewController(
-          onImage: processImage,
-          onTakeImage: onTakeImage,
+        onImage: processImage,
+        onTakeImage: onTakeImage,
       ),
       child: CameraView(
         title: 'Rectangle Detector',
@@ -56,7 +55,10 @@ class _ObjectDetectorView extends State<RectangleDetector> {
   Future<void> onTakeImage(CameraImage cameraImage) async {
     final image = await convertYUV420toImageColor(cameraImage);
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => ImagePreview(image: image, rect: currentFirstResult?.getBoundinBox(),)));
+        builder: (_) => ImagePreview(
+              image: image,
+              rect: currentFirstResult?.getBoundinBox(),
+            )));
   }
 
   Future<void> processImage(InputImage inputImage) async {

@@ -1,4 +1,3 @@
-
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,12 @@ class CameraView extends StatefulWidget {
   final CustomPaint? customPaint;
   final CameraLensDirection initialDirection;
 
-  const CameraView({
-    Key? key,
-    required this.title,
-    required this.customPaint,
-    this.initialDirection = CameraLensDirection.back
-  }) : super(key: key);
+  const CameraView(
+      {Key? key,
+      required this.title,
+      required this.customPaint,
+      this.initialDirection = CameraLensDirection.back})
+      : super(key: key);
 
   @override
   _CameraViewState createState() => _CameraViewState();

@@ -6,7 +6,7 @@ class SmartChangeNotifier extends ChangeNotifier {
 
   @override
   notifyListeners() {
-    if(mounted) super.notifyListeners();
+    if (mounted) super.notifyListeners();
   }
 
   @override

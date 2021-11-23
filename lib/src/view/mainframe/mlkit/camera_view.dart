@@ -13,10 +13,10 @@ enum ScreenMode { liveFeed, gallery }
 class CameraViewOld extends StatefulWidget {
   CameraViewOld(
       {Key? key,
-        required this.title,
-        required this.customPaint,
-        required this.onImage,
-        this.initialDirection = CameraLensDirection.back})
+      required this.title,
+      required this.customPaint,
+      required this.onImage,
+      this.initialDirection = CameraLensDirection.back})
       : super(key: key);
 
   final String title;
@@ -69,8 +69,8 @@ class _CameraViewOldState extends State<CameraViewOld> {
                 _mode == ScreenMode.liveFeed
                     ? Icons.photo_library_outlined
                     : (Platform.isIOS
-                    ? Icons.camera_alt_outlined
-                    : Icons.camera),
+                        ? Icons.camera_alt_outlined
+                        : Icons.camera),
               ),
             ),
           ),
@@ -128,20 +128,20 @@ class _CameraViewOldState extends State<CameraViewOld> {
     return ListView(shrinkWrap: true, children: [
       _image != null
           ? Container(
-        height: 400,
-        width: 400,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Image.file(_image!),
-            if (widget.customPaint != null) widget.customPaint!,
-          ],
-        ),
-      )
+              height: 400,
+              width: 400,
+              child: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  Image.file(_image!),
+                  if (widget.customPaint != null) widget.customPaint!,
+                ],
+              ),
+            )
           : Icon(
-        Icons.image,
-        size: 200,
-      ),
+              Icons.image,
+              size: 200,
+            ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
@@ -225,7 +225,7 @@ class _CameraViewOldState extends State<CameraViewOld> {
     final bytes = allBytes.done().buffer.asUint8List();
 
     final Size imageSize =
-    Size(image.width.toDouble(), image.height.toDouble());
+        Size(image.width.toDouble(), image.height.toDouble());
 
     final camera = cameras[_cameraIndex];
     final imageRotation =
@@ -237,7 +237,7 @@ class _CameraViewOldState extends State<CameraViewOld> {
             InputImageFormat.NV21;
 
     final planeData = image.planes.map(
-          (Plane plane) {
+      (Plane plane) {
         return InputImagePlaneMetadata(
           bytesPerRow: plane.bytesPerRow,
           height: plane.height,
@@ -254,7 +254,7 @@ class _CameraViewOldState extends State<CameraViewOld> {
     );
 
     final inputImage =
-    InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
 
     widget.onImage(inputImage);
   }

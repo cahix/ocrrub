@@ -1,5 +1,3 @@
-
-
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -17,7 +15,7 @@ class CameraViewController with ChangeNotifier {
   final Function(InputImage inputImage) onImage;
   final Function(CameraImage cameraImage) onTakeImage;
 
-  CameraViewController({required this.onImage,required this.onTakeImage});
+  CameraViewController({required this.onImage, required this.onTakeImage});
 
   Future<void> startLiveFeed() async {
     final camera = cameras[cameraIndex];
@@ -46,11 +44,11 @@ class CameraViewController with ChangeNotifier {
   }
 
   void takeCameraImage() {
-    if(currentImage == null) return;
+    if (currentImage == null) return;
     onTakeImage(currentImage!);
   }
 
- void _processCameraImage(CameraImage image) {
+  void _processCameraImage(CameraImage image) {
     final WriteBuffer allBytes = WriteBuffer();
     for (Plane plane in image.planes) {
       allBytes.putUint8List(plane.bytes);
@@ -58,7 +56,7 @@ class CameraViewController with ChangeNotifier {
     final bytes = allBytes.done().buffer.asUint8List();
 
     final Size imageSize =
-    Size(image.width.toDouble(), image.height.toDouble());
+        Size(image.width.toDouble(), image.height.toDouble());
 
     final camera = cameras[cameraIndex];
     final imageRotation =
@@ -69,13 +67,14 @@ class CameraViewController with ChangeNotifier {
         InputImageFormatMethods.fromRawValue(image.format.raw) ??
             InputImageFormat.NV21;
 
-    final planeData = image.planes.map((Plane plane) {
-      return InputImagePlaneMetadata(
-        bytesPerRow: plane.bytesPerRow,
-        height: plane.height,
-        width: plane.width,
-      );
-    },
+    final planeData = image.planes.map(
+      (Plane plane) {
+        return InputImagePlaneMetadata(
+          bytesPerRow: plane.bytesPerRow,
+          height: plane.height,
+          width: plane.width,
+        );
+      },
     ).toList();
 
     final inputImageData = InputImageData(
@@ -86,7 +85,7 @@ class CameraViewController with ChangeNotifier {
     );
 
     final inputImage =
-    InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
+        InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
 
     onImage(inputImage);
     currentImage = image;

@@ -5,7 +5,8 @@ class ProviderView<T extends ChangeNotifier> extends StatelessWidget {
   final T provider;
   final Widget child;
 
-  const ProviderView({Key? key, required this.provider, required this.child}) : super(key: key);
+  const ProviderView({Key? key, required this.provider, required this.child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
