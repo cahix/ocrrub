@@ -1,13 +1,23 @@
+import 'package:ocrrub/src/view/ocr/expected_texts.dart';
+
 import '../common.dart';
 import 'settings_controller.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
 
   static const routeName = '/settings';
 
   @override
+  State<SettingsView> createState() => _SettingsViewState();
+}
+
+class _SettingsViewState extends State<SettingsView> {
+  late SettingsController _controller;
+
+  @override
   Widget build(BuildContext context) {
+    _controller = context.read<SettingsController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -15,55 +25,28 @@ class SettingsView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _themeSettings(context),
-            _ocrTextSettings(context),
+            _ocrTextSettings(),
           ],
         )
       ),
     );
   }
 
-  Widget _themeSettings(BuildContext context) {
-    final controller = context.read<SettingsController>();
-    return DropdownButton<ThemeMode>(
-      value: controller.themeMode,
-      onChanged: controller.updateThemeMode,
+  Widget _ocrTextSettings() {
+    return DropdownButton<String?>(
+      value: _controller.expectedOCR,
+      onChanged: (value) => setState(() { _controller.expectedOCR = value; }),
       items: const [
         DropdownMenuItem(
-          value: ThemeMode.system,
-          child: Text('System Theme'),
+          value: loremIpsum100,
+          child: Text('Lorem Ipsum (100 words)'),
         ),
         DropdownMenuItem(
-          value: ThemeMode.light,
-          child: Text('Light Theme'),
+          value: null,
+          child: Text('None'),
         ),
-        DropdownMenuItem(
-          value: ThemeMode.dark,
-          child: Text('Dark Theme'),
-        )
-      ],
-    );
-  }
-
-  Widget _ocrTextSettings(BuildContext context) {
-    final controller = context.read<SettingsController>();
-    return DropdownButton<ThemeMode>(
-      value: controller.themeMode,
-      onChanged: controller.updateThemeMode,
-      items: const [
-        DropdownMenuItem(
-          value: ThemeMode.system,
-          child: Text('System Theme'),
-        ),
-        DropdownMenuItem(
-          value: ThemeMode.light,
-          child: Text('Light Theme'),
-        ),
-        DropdownMenuItem(
-          value: ThemeMode.dark,
-          child: Text('Dark Theme'),
-        )
       ],
     );
   }

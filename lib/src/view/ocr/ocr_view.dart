@@ -1,5 +1,7 @@
 
 import 'package:ocrrub/src/view/ocr/widgets/image_view.dart';
+import 'package:ocrrub/src/view/settings/settings_controller.dart';
+import 'package:ocrrub/src/view/widgets/default_scaffold.dart';
 
 import '../common.dart';
 import 'ocr_view_controller.dart';
@@ -24,10 +26,8 @@ class _OCRViewState extends State<OCRView> {
   @override
   Widget build(BuildContext context) {
     context.watch<OCRViewController>();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('OCR'),
-      ),
+    return DefaultScaffold(
+      title: 'OCR',
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -65,7 +65,9 @@ class _OCRViewState extends State<OCRView> {
     return Visibility(
       visible: _controller.currentImagePath != null,
       child: ElevatedButton(
-        onPressed: () => _controller.startOCR(),
+        onPressed: () => _controller.startOCR(
+            expected: context.read<SettingsController>().expectedOCR,
+        ),
         child: Text('OCR'),
       ),
     );

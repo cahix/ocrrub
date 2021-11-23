@@ -8,10 +8,11 @@ void showMaterialBanner(String title) {
       leading: const Icon(Icons.info_outline_rounded));
 }
 
-void showMaterialBannerTextDiff(String text1, String text2) {
+void showMaterialBannerTextDiff(String oldText, String newText) {
   return _showMaterialBannerInScrollView(PrettyDiffText(
-    oldText: text1,
-    newText: text1,
+    defaultTextStyle: TextStyle(color: Colors.white),
+    oldText: oldText,
+    newText: newText,
   ));
 }
 

@@ -20,7 +20,7 @@ class OCRViewController extends SmartChangeNotifier {
     if (currentImagePath == null) return;
     final inputImage = InputImage.fromFilePath(currentImagePath!);
     final recognisedText = await textDetector.processImage(inputImage);
-    _onTextRecognised(recognisedText);
+    _onTextRecognised(recognisedText, expected: expected);
     if (recognisedText.blocks.length > 0) notifyListeners();
   }
 

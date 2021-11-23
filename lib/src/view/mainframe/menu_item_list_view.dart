@@ -12,10 +12,10 @@ class MenuItemListView extends StatelessWidget {
   const MenuItemListView({
     Key? key,
     this.items = const [
-      MenuItem(TextDetectorView.routeName, name: 'Text Detector'),
-      MenuItem(TextBlockerView.routeName, name: 'Text Blocker'),
-      MenuItem(RectangleDetector.routeName, name: 'Rectangle Detector'),
-      MenuItem(OCRView.routeName, name: 'OCR'),
+      // MenuItem(TextDetectorView.routeName, name: 'Text Detector'),
+      // MenuItem(TextBlockerView.routeName, name: 'Text Blocker'),
+      // MenuItem(RectangleDetector.routeName, name: 'Rectangle Detector'),
+      MenuItem(OCRView.routeName, name: 'Start OCR'),
     ],
   }) : super(key: key);
 
