@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_blocker_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_detector_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit2/rectangle_detector.dart';
-import 'package:ocrrub/src/view/mainframe/ocr/ocr_view.dart';
+import 'package:ocrrub/src/view/ocr/page/ocr_view.dart';
 import 'package:ocrrub/src/view/widgets/default_scaffold.dart';
 
 import 'menu_item.dart';

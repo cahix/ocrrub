@@ -5,10 +5,11 @@ import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
-import 'package:ocrrub/src/view/mainframe/ocr/my_painter.dart';
 import 'package:ocrrub/src/view/misc/helper_functions.dart';
 import 'package:ocrrub/src/view/widgets/scaffold_messenger.dart';
 import 'package:ocrrub/src/view/widgets/smart_change_notifier.dart';
+
+import '../widgets/my_painter.dart';
 
 class OCRViewController extends SmartChangeNotifier {
   TextDetector textDetector = GoogleMlKit.vision.textDetector();
