@@ -1,5 +1,5 @@
-import '../../common.dart';
-import '../provider/settings_controller.dart';
+import '../common.dart';
+import 'settings_controller.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 
-import 'package:ocrrub/src/view/settings/provider/settings_controller.dart';
+import 'package:ocrrub/src/view/settings/settings_controller.dart';
 
 import 'common.dart';
-import 'ocr/provider/ocr_view_controller.dart';
+import 'ocr/ocr_view_controller.dart';
 
 class GlobalProviders extends StatelessWidget {
   final Widget child;

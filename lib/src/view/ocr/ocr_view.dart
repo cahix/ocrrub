@@ -1,8 +1,8 @@
 
 import 'package:ocrrub/src/view/ocr/widgets/image_view.dart';
 
-import '../../common.dart';
-import '../provider/ocr_view_controller.dart';
+import '../common.dart';
+import 'ocr_view_controller.dart';
 
 class OCRView extends StatefulWidget {
   static const String routeName = '/ocrview';

@@ -8,11 +8,11 @@ import 'package:ocrrub/src/view/mainframe/mlkit/object_detector_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_blocker_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit/text_detector_view.dart';
 import 'package:ocrrub/src/view/mainframe/mlkit2/rectangle_detector.dart';
-import 'package:ocrrub/src/view/ocr/page/ocr_view.dart';
+import 'package:ocrrub/src/view/ocr/ocr_view.dart';
 
 import '../view/mainframe/menu_item_list_view.dart';
-import 'settings/provider/settings_controller.dart';
-import 'settings/page/settings_view.dart';
+import 'settings/settings_controller.dart';
+import 'settings/settings_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key,}) : super(key: key);
