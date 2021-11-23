@@ -47,7 +47,7 @@ class OCRViewController extends SmartChangeNotifier {
     final blocks = recognisedText.blocks;
     if (blocks.length > 0) {
       _setPaint(recognisedText);
-      ocrText = recognisedText.text;
+      ocrText = recognisedText.text.replaceAll("\n", ' ');
     } else {
       showSnackbar('No text recognized');
       customPainter = null;
