@@ -3,7 +3,7 @@ import 'package:ocrrub/src/view/ocr/ocr_view_controller.dart';
 import 'package:ocrrub/src/view/settings/settings_controller.dart';
 import 'package:pretty_diff_text/pretty_diff_text.dart';
 
-import '../common.dart';
+import '../../common.dart';
 
 class TextDiffView extends StatelessWidget {
   const TextDiffView({Key? key,}) : super(key: key);
@@ -13,7 +13,7 @@ class TextDiffView extends StatelessWidget {
     context.watch<SettingsController>();
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(left: kPad, right: kPad, top: kPad, bottom: 70),
+        padding: const EdgeInsets.only(left: kPad, right: kPad, top: kPad, bottom: 80),
         child: _buildDiff(context),
       ),
     );

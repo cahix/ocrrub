@@ -1,7 +1,7 @@
 
-import 'package:ocrrub/src/view/ocr/text_diff_view.dart';
+import 'package:ocrrub/src/view/ocr/widgets/text_diff_view.dart';
 import 'package:ocrrub/src/view/ocr/widgets/image_view.dart';
-import 'package:ocrrub/src/view/settings/settings_controller.dart';
+import 'package:ocrrub/src/view/settings/widgets/ocr_expected_text_settings.dart';
 import 'package:ocrrub/src/view/widgets/default_scaffold.dart';
 import 'package:ocrrub/src/view/widgets/loading_indicator.dart';
 import 'package:ocrrub/src/view/widgets/super_button.dart';
@@ -17,13 +17,13 @@ class OCRView extends StatefulWidget {
 }
 
 class _OCRViewState extends State<OCRView> {
+  static const double buttonHeight = 40;
   late OCRViewController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = context.read<OCRViewController>();
-    _controller.scan();
   }
 
   @override
@@ -51,12 +51,18 @@ class _OCRViewState extends State<OCRView> {
   }
 
   Widget _imageView() {
+    if(_controller.currentImagePath == null) {
+      return Center(
+        child: Padding(
+            padding: const EdgeInsets.only(bottom: buttonHeight),
+            child: OCRExpectedTextSettings(),
+        ),
+      );
+    }
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(left: kPad, right: kPad, top: kPad, bottom: 70),
+        padding: const EdgeInsets.only(left: kPad, right: kPad, top: kPad, bottom: buttonHeight),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ImageView(
               imagePath: _controller.currentImagePath,
@@ -69,11 +75,14 @@ class _OCRViewState extends State<OCRView> {
   }
 
   Widget _scanButton() {
-    return SuperButton(
-      maxWidth: 250,
-      height: 35,
-      onPressed: () => _controller.scan(),
-      label: 'Scan',
+    return SizedBox(
+      width: 250,
+      height: buttonHeight,
+      child: ElevatedButton(
+          onPressed: () => _controller.scan(),
+          child: Text('Scan'),
+        style: ElevatedButton.styleFrom(primary: primaryColor),
+      ),
     );
   }
 }

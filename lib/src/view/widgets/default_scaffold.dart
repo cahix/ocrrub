@@ -31,7 +31,7 @@ class DefaultScaffold extends StatelessWidget {
             ),
           ],
         ),
-        body: body,
+        body: SafeArea(child: body),
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: floatingActionButtonLocation,
     );

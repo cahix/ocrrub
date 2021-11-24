@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 
+import '../../common.dart';
+
 class MyPainter extends CustomPainter {
   MyPainter(this.recognisedText, this.absoluteImageSize);
 
@@ -23,8 +25,8 @@ class MyPainter extends CustomPainter {
 
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
-      ..color = Colors.blueAccent
-      ..strokeWidth = 1.0;
+      ..color = primaryColor
+      ..strokeWidth = 1.1;
     for (var block in recognisedText.blocks) {
       canvas.drawRect(scaleRect(block), paint);
     }

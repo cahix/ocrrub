@@ -125,7 +125,7 @@ private fun getCorners(contours: ArrayList<MatOfPoint>, size: Size): Corners? {
             val convex = MatOfPoint()
             approx.convertTo(convex, CvType.CV_32S)
             // select biggest 4 angles polygon
-            if (points.size == 4 && Imgproc.isContourConvex(convex) && area > 25000.0) {
+            if (points.size == 4 && Imgproc.isContourConvex(convex) && area > 50000.0) {
                 val foundPoints = sortPoints(points)
                 return Corners(foundPoints, size)
             }
