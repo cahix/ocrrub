@@ -3,6 +3,7 @@ import 'package:ocrrub/src/view/ocr/text_diff_view.dart';
 import 'package:ocrrub/src/view/ocr/widgets/image_view.dart';
 import 'package:ocrrub/src/view/settings/settings_controller.dart';
 import 'package:ocrrub/src/view/widgets/default_scaffold.dart';
+import 'package:ocrrub/src/view/widgets/loading_indicator.dart';
 import 'package:ocrrub/src/view/widgets/super_button.dart';
 
 import '../common.dart';
@@ -37,6 +38,9 @@ class _OCRViewState extends State<OCRView> {
   }
 
   Widget _pageView() {
+    if(_controller.isScanning) {
+      return Center(child: LoadingIndicator.medium());
+    }
     return PageView(
       controller: _controller.pageController,
       children: [

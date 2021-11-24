@@ -8,7 +8,6 @@ import 'package:ocrrub/src/view/common.dart';
 import 'package:ocrrub/src/view/misc/helper_functions.dart';
 import 'package:ocrrub/src/view/widgets/scaffold_messenger.dart';
 import 'package:ocrrub/src/view/widgets/smart_change_notifier.dart';
-
 import 'widgets/my_painter.dart';
 
 class OCRViewController extends SmartChangeNotifier {
@@ -17,14 +16,17 @@ class OCRViewController extends SmartChangeNotifier {
   String? currentImagePath;
   CustomPainter? customPainter;
   String? ocrText;
+  bool isScanning = false;
 
   void reset() {
     currentImagePath = null;
     customPainter = null;
     ocrText = null;
+    notifyListeners();
   }
 
   Future<void> scan() async {
+    isScanning = true;
     reset();
     await _getImage();
     if(currentImagePath != null) {
@@ -32,8 +34,18 @@ class OCRViewController extends SmartChangeNotifier {
     }
     notifyListeners();
     if(ocrText != null) {
-      pageController.animateToPage(1, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+      _animateToTextDiffPage();
     }
+    isScanning = false;
+  }
+
+  void _animateToTextDiffPage() {
+    Future.delayed(Duration(milliseconds: 500)).then((value) =>
+        pageController.animateToPage(
+            1,
+            duration: Duration(milliseconds: 350),
+            curve: Curves.fastOutSlowIn)
+    );
   }
 
   Future<void> _startOCR() async {

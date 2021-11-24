@@ -19,7 +19,8 @@ dependencies:
   image_picker: ^0.8.4+4
   provider: ^6.0.1
   image: ^3.0.8
-  edge_detection: ^1.0.7
+  edge_detection:
+    path: ./.edge_detection-1.0.8/
   flutter_lorem: ^2.0.0
   pretty_diff_text: ^1.0.0
   auto_size_text: ^3.0.0

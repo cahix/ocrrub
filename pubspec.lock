@@ -102,9 +102,9 @@ packages:
   edge_detection:
     dependency: "direct main"
     description:
-      name: edge_detection
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: ".edge_detection-1.0.8"
+      relative: true
+    source: path
     version: "1.0.7"
   fake_async:
     dependency: transitive
