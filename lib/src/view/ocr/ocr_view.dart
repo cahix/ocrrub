@@ -61,7 +61,7 @@ class _OCRViewState extends State<OCRView> {
     }
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(left: kPad, right: kPad, top: kPad, bottom: buttonHeight),
+        padding: const EdgeInsets.only(top: kPad, bottom: 2*buttonHeight),
         child: Column(
           children: [
             ImageView(
