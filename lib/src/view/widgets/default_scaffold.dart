@@ -24,7 +24,7 @@ class DefaultScaffold extends StatelessWidget {
           title: Text(title),
           actions: [
             IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.settings_outlined,size: 22,),
               onPressed: () {
                 Navigator.restorablePushNamed(context, SettingsView.routeName);
               },
