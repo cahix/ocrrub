@@ -1,8 +1,6 @@
-import 'package:ocrrub/src/view/ocr/expected_texts.dart';
 import 'package:ocrrub/src/view/settings/widgets/ocr_expected_text_settings.dart';
 
 import '../common.dart';
-import 'settings_controller.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);

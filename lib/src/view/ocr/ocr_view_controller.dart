@@ -1,22 +1,28 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:edge_detection/edge_detection.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
 import 'package:ocrrub/src/view/misc/helper_functions.dart';
 import 'package:ocrrub/src/view/widgets/scaffold_messenger.dart';
 import 'package:ocrrub/src/view/widgets/smart_change_notifier.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+
 import 'widgets/my_painter.dart';
 
 class OCRViewController extends SmartChangeNotifier {
+  ScreenshotController screenshotController = ScreenshotController();
   TextDetector textDetector = GoogleMlKit.vision.textDetector();
   PageController pageController = PageController();
   String? currentImagePath;
   CustomPainter? customPainter;
   String? ocrText;
   bool isScanning = false;
+
+  bool hasImage() => currentImagePath != null;
 
   void reset() {
     currentImagePath = null;
@@ -57,6 +63,7 @@ class OCRViewController extends SmartChangeNotifier {
 
   void _onTextRecognised(RecognisedText recognisedText) {
     final blocks = recognisedText.blocks;
+    print('Blocks:  ${blocks.length}');
     if (blocks.length > 0) {
       _setPaint(recognisedText);
       ocrText = recognisedText.text.replaceAll("\n", ' ');
@@ -83,6 +90,16 @@ class OCRViewController extends SmartChangeNotifier {
     } on PlatformException catch (e) {
       showSnackbar(e.toString());
       currentImagePath = null;
+    }
+  }
+
+  Future<void> takeScreenshot() async {
+    final dir = (await getExternalStorageDirectories())?.first;
+    if (dir != null) {
+      screenshotController.captureAndSave(dir.path)
+          .then((value) => showSnackbar('Saved'));
+    } else {
+      showSnackbar('Cannot save file');
     }
   }
 

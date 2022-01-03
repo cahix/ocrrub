@@ -23,6 +23,10 @@ dependencies:
   flutter_lorem: ^2.0.0
   pretty_diff_text: ^1.0.0
   auto_size_text: ^3.0.0
+  string_similarity: ^2.0.0
+  screenshot: ^1.2.3
+  path_provider: ^2.0.8
+  diff_match_patch: ^0.4.1
 
 dev_dependencies:
   flutter_test:

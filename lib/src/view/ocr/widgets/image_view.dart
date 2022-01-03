@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:ocrrub/src/view/settings/widgets/ocr_expected_text_settings.dart';
 import 'package:ocrrub/src/view/widgets/emty_widget.dart';
 
 class ImageView extends StatelessWidget {

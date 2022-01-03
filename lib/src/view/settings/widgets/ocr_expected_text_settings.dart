@@ -35,12 +35,8 @@ class _OCRExpectedTextSettingsState extends State<OCRExpectedTextSettings> {
               child: Text('Lorem Ipsum (100 words)'),
             ),
             DropdownMenuItem(
-              value: kafka75,
-              child: Text('Kafka (75 words)'),
-            ),
-            DropdownMenuItem(
-              value: liEuropanLingues150,
-              child: Text('Li Europan lingues (150 words)'),
+              value: sampleText,
+              child: Text('Sample Text'),
             ),
           ],
         ),
