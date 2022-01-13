@@ -31,7 +31,10 @@ class _OCRViewState extends State<OCRView> {
     context.watch<OCRViewController>();
     return DefaultScaffold(
       title: 'OCR',
-      body: _pageView(),
+      body: Screenshot(
+          controller: _controller.screenshotController,
+          child: _pageView(),
+      ),
       floatingActionButton: _buttons(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -61,15 +64,12 @@ class _OCRViewState extends State<OCRView> {
     }
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: kPad, bottom: 2*buttonHeight),
+        padding: const EdgeInsets.only(top: kPad, bottom: 2*buttonHeight, left: 8, right: 8),
         child: Column(
           children: [
-            Screenshot(
-              controller: _controller.screenshotController,
-              child: ImageView(
-                imagePath: _controller.currentImagePath,
-                customPainter: _controller.customPainter,
-              ),
+            ImageView(
+              imagePath: _controller.currentImagePath,
+              customPainter: _controller.customPainter,
             ),
           ],
         ),
