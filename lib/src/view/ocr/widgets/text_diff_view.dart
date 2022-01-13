@@ -42,7 +42,7 @@ class TextDiffView extends StatelessWidget {
   }
 
   void printDiff(String? s1, String? s2) {
-    final int expectedChars = s1?.length ?? 0;
+    // final int expectedChars = s1?.length ?? 0;
     int recognizedChars = 0;
     final diffmatch = diff(s1 ?? '', s2 ?? '');
     for(var diff in diffmatch) {

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:edge_detection/edge_detection.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
@@ -84,6 +83,16 @@ class OCRViewController extends SmartChangeNotifier {
   }
 
   Future<void> _getImage() async {
+    try {
+      currentImagePath = await EdgeDetection.detectEdge;
+      print("$currentImagePath");
+    } on PlatformException catch (e) {
+      showSnackbar(e.toString());
+      currentImagePath = null;
+    }
+  }
+
+  Future<void> _getImageFromStorage() async {
     try {
       currentImagePath = await EdgeDetection.detectEdge;
       print("$currentImagePath");

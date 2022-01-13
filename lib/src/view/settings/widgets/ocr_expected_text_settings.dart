@@ -25,22 +25,15 @@ class _OCRExpectedTextSettingsState extends State<OCRExpectedTextSettings> {
           onChanged: (value) => setState(() {
             _controller.expectedOCR = value;
           }),
-          items: const [
-            DropdownMenuItem(
-              value: null,
-              child: Text('- None -',),
-            ),
-            DropdownMenuItem(
-              value: loremIpsum100,
-              child: Text('Lorem Ipsum (100 words)'),
-            ),
-            DropdownMenuItem(
-              value: sampleText,
-              child: Text('Sample Text'),
-            ),
-          ],
+          items: getItems()
         ),
       ],
     );
+  }
+
+  List<DropdownMenuItem<String>> getItems() {
+    List<DropdownMenuItem<String>> res = [];
+    expectedTexts.forEach((key, value) {res.add(DropdownMenuItem(child: Text(key), value: value,));});
+    return res;
   }
 }
