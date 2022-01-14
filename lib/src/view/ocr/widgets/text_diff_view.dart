@@ -22,7 +22,7 @@ class TextDiffView extends StatelessWidget {
 
   Widget _buildDiff(BuildContext context) {
     final oldText = context.read<SettingsController>().expectedOCR;
-    final newText = context.read<OCRViewController>().ocrText;
+    final newText = context.read<OCRController>().ocrText;
     final comparison = oldText.similarityTo(newText).toStringAsFixed(5);
     print('Comp: $comparison');
     printDiff(oldText, newText);

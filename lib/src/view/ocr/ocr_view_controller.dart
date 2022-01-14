@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:edge_detection/edge_detection.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
@@ -12,7 +13,7 @@ import 'package:screenshot/screenshot.dart';
 
 import 'widgets/my_painter.dart';
 
-class OCRViewController extends SmartChangeNotifier {
+class OCRController extends SmartChangeNotifier {
   ScreenshotController screenshotController = ScreenshotController();
   TextDetector textDetector = GoogleMlKit.vision.textDetector();
   PageController pageController = PageController();
@@ -30,10 +31,15 @@ class OCRViewController extends SmartChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> scan() async {
+  Future<void> scan({bool fromStorage = false}) async {
     isScanning = true;
     reset();
-    await _getImage();
+    if(fromStorage) {
+      await _getImageFromStorage();
+    }
+    else {
+      await _getImageFromEdgeDetection();
+    }
     if(currentImagePath != null) {
       await _startOCR();
     }
@@ -82,7 +88,7 @@ class OCRViewController extends SmartChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _getImage() async {
+  Future<void> _getImageFromEdgeDetection() async {
     try {
       currentImagePath = await EdgeDetection.detectEdge;
       print("$currentImagePath");
@@ -93,12 +99,9 @@ class OCRViewController extends SmartChangeNotifier {
   }
 
   Future<void> _getImageFromStorage() async {
-    try {
-      currentImagePath = await EdgeDetection.detectEdge;
-      print("$currentImagePath");
-    } on PlatformException catch (e) {
-      showSnackbar(e.toString());
-      currentImagePath = null;
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      currentImagePath = result.files.first.path;
     }
   }
 

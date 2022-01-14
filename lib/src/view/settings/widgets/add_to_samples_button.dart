@@ -18,7 +18,7 @@ class AddToSamplesButton extends StatelessWidget {
 
   Future<void> _addToSamples(BuildContext context) async {
     final controller = TextEditingController();
-    final ocr = context.read<OCRViewController>().ocrText;
+    final ocr = context.read<OCRController>().ocrText;
     if(ocr == null) {
       return showSnackbar('No OCR found');
     }

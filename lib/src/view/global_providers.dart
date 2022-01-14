@@ -19,8 +19,8 @@ class GlobalProviders extends StatelessWidget {
         ChangeNotifierProvider<SettingsController>(
           create: (_) => SettingsController(),
         ),
-        ChangeNotifierProvider<OCRViewController>(
-          create: (_) => OCRViewController(),
+        ChangeNotifierProvider<OCRController>(
+          create: (_) => OCRController(),
         ),
       ],
       child: child,

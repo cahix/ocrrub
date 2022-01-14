@@ -18,17 +18,17 @@ class OCRView extends StatefulWidget {
 
 class _OCRViewState extends State<OCRView> {
   static const double buttonHeight = 40;
-  late OCRViewController _controller;
+  late OCRController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = context.read<OCRViewController>();
+    _controller = context.read<OCRController>();
   }
 
   @override
   Widget build(BuildContext context) {
-    context.watch<OCRViewController>();
+    context.watch<OCRController>();
     return DefaultScaffold(
       title: 'OCR',
       body: Screenshot(
@@ -81,32 +81,32 @@ class _OCRViewState extends State<OCRView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        if(_controller.hasImage()) _screenshotButton(),
+        _selectFromGalleryButton(),
         _scanButton(),
       ],
     );
   }
 
+  Widget _selectFromGalleryButton() {
+    return SizedBox(
+      width: 100,
+      height: buttonHeight,
+      child: ElevatedButton(
+        onPressed: () => _controller.scan(fromStorage: true),
+        child: Text('Pick File', style: TextStyle(color: primaryColor)),
+        style: ElevatedButton.styleFrom(primary: Colors.white),
+      ),
+    );
+  }
+
   Widget _scanButton() {
     return SizedBox(
-      width: 125,
+      width: 100,
       height: buttonHeight,
       child: ElevatedButton(
           onPressed: () => _controller.scan(),
           child: Text('Scan'),
         style: ElevatedButton.styleFrom(primary: primaryColor),
-      ),
-    );
-  }
-
-  Widget _screenshotButton() {
-    return SizedBox(
-      width: 125,
-      height: buttonHeight,
-      child: ElevatedButton(
-          onPressed: () => _controller.takeScreenshot(),
-          child: Text('Save', style: TextStyle(color: primaryColor),),
-        style: ElevatedButton.styleFrom(primary: Colors.white),
       ),
     );
   }

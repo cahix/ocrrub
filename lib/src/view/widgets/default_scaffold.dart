@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import '../common.dart';
+import 'package:ocrrub/src/view/ocr/ocr_view_controller.dart';
 import 'package:ocrrub/src/view/settings/settings_view.dart';
+
+import 'default_scaffold_screenshotbutton.dart';
 
 class DefaultScaffold extends StatelessWidget {
   final String title;
@@ -22,18 +24,23 @@ class DefaultScaffold extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(title),
+          leading: DefaultScaffoldScreenshotButton(),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.settings_outlined,size: 22,),
-              onPressed: () {
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
-              },
-            ),
+            _settingsButton(context),
           ],
         ),
         body: SafeArea(child: body),
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: floatingActionButtonLocation,
+    );
+  }
+
+  Widget _settingsButton(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.settings_outlined,size: 22,),
+      onPressed: () {
+        Navigator.restorablePushNamed(context, SettingsView.routeName);
+      },
     );
   }
 }
