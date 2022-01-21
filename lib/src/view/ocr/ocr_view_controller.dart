@@ -75,6 +75,9 @@ class OCRController extends SmartChangeNotifier {
     if (blocks.length > 0) {
       _setPaint(recognisedText);
      // ocrText = recognisedText.text.replaceAll("\n", ' ');
+      for (var n in norm) {
+        print(n.text + " " + n.cornerPoints[0].toString());
+      }
       ocrText = _ocrNormaliser.getTextFromLines(norm).replaceAll("\n", ' ');
     } else {
       showSnackbar('No text recognized');
