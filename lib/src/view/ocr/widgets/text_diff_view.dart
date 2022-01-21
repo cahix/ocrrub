@@ -1,5 +1,6 @@
 import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:ocrrub/src/view/ocr/ocr_view_controller.dart';
+import 'package:ocrrub/src/view/ocr/widgets/legend.dart';
 import 'package:ocrrub/src/view/settings/settings_controller.dart';
 import 'package:pretty_diff_text/pretty_diff_text.dart';
 import 'package:string_similarity/string_similarity.dart';
@@ -15,8 +16,30 @@ class TextDiffView extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: kPad, right: kPad, top: kPad, bottom: 80),
-        child: _buildDiff(context),
+        child: Column(
+          children: [
+            SizedBox(height: 4,),
+            _legend(context),
+            SizedBox(height: kPad,),
+            _buildDiff(context),
+          ],
+        ),
       ),
+    );
+  }
+
+  static const Color matchColor = Colors.greenAccent;
+  static const Color addedColor = Colors.orangeAccent;
+  static const Color deletedColor = Colors.redAccent;
+
+  Widget _legend(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        const LegendItem(color: matchColor, name: 'Expected'),
+        const LegendItem(color: addedColor, name: 'Added'),
+        const LegendItem(color: deletedColor, name: 'Deleted'),
+      ],
     );
   }
 
@@ -32,9 +55,9 @@ class TextDiffView extends StatelessWidget {
       return Text(newText);
     } else {
       return PrettyDiffText(
-        defaultTextStyle: TextStyle(color: Colors.greenAccent),
-        addedTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.orangeAccent),
-        deletedTextStyle: TextStyle(color: Colors.white, backgroundColor: Colors.redAccent),
+        defaultTextStyle: TextStyle(color: matchColor),
+        addedTextStyle: TextStyle(color: Colors.white, backgroundColor: addedColor),
+        deletedTextStyle: TextStyle(color: Colors.white, backgroundColor: deletedColor),
         oldText: oldText,
         newText: newText,
       );
