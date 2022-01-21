@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:ocrrub/src/view/common.dart';
 import 'package:ocrrub/src/view/misc/helper_functions.dart';
+import 'package:ocrrub/src/view/ocr/ocr_noramaliser.dart';
 import 'package:ocrrub/src/view/widgets/scaffold_messenger.dart';
 import 'package:ocrrub/src/view/widgets/smart_change_notifier.dart';
 import 'package:path_provider/path_provider.dart';
@@ -21,6 +22,7 @@ class OCRController extends SmartChangeNotifier {
   CustomPainter? customPainter;
   String? ocrText;
   bool isScanning = false;
+  OCRNormaliser _ocrNormaliser = OCRNormaliser();
 
   bool hasImage() => currentImagePath != null;
 
