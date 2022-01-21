@@ -16,6 +16,7 @@ class SettingsController with ChangeNotifier {
   void addToExpectedTexts(String name, String? value) {
     expectedTexts[name] = value;
     showSnackbar('Added successfully');
+    expectedOCR = value;
     notifyListeners();
   }
 }
