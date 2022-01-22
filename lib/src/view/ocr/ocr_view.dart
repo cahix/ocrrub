@@ -105,8 +105,8 @@ class _OCRViewState extends State<OCRView> {
       height: buttonHeight,
       child: ElevatedButton(
           onPressed: () => _controller.scan(),
-          child: Text('Scan'),
-        style: ElevatedButton.styleFrom(primary: primaryColor),
+          child: Text('Scan', style: TextStyle(color: primaryColor)),
+        style: ElevatedButton.styleFrom(primary: Colors.white),
       ),
     );
   }

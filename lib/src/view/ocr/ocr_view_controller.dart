@@ -78,11 +78,19 @@ class OCRController extends SmartChangeNotifier {
       for (var n in norm) {
         print(n.text + " " + n.cornerPoints[0].toString());
       }
-      ocrText = _ocrNormaliser.getTextFromLines(norm).replaceAll("\n", ' ');
+      ocrText = getTextFromLines(norm);
     } else {
       showSnackbar('No text recognized');
       customPainter = null;
     }
+  }
+
+  String getTextFromLines(List<TextLine> lines) {
+    String res = '';
+    for(var line in lines) {
+      res += line.text + " ";
+    }
+    return res.substring(0, res.length - 1);
   }
 
   void _setPaint(RecognisedText recognisedText) async {

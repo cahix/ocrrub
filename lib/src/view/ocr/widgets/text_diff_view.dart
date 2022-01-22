@@ -37,8 +37,8 @@ class TextDiffView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const LegendItem(color: matchColor, name: 'Expected'),
-        const LegendItem(color: addedColor, name: 'Added'),
-        const LegendItem(color: deletedColor, name: 'Deleted'),
+        const LegendItem(color: addedColor, name: 'New'),
+        const LegendItem(color: deletedColor, name: 'Missing'),
       ],
     );
   }

@@ -11,14 +11,6 @@ class OCRNormaliser {
     return sortByOffset(lines);
   }
 
-  String getTextFromLines(List<TextLine> lines) {
-    String res = '';
-    for(var line in lines) {
-      res += line.text + "\n";
-    }
-    return res;
-  }
-
   List<TextLine> sortByOffset(List<TextLine> lines) {
     return lines..sort((a, b) {
       final topLeft1 = a.cornerPoints[0];
