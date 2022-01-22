@@ -22,8 +22,6 @@ class OCRNormaliser {
   }
 
   int compareToWithTolerance(double a, double b, double tolerance) {
-    if((a - b).abs() < tolerance) {
-      return 0;
-    } else return a.compareTo(b);
-;  }
+    return ((a - b).abs() < tolerance) ? 0 : a.compareTo(b);
+  }
 }
