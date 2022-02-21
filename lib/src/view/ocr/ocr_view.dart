@@ -7,7 +7,7 @@ import 'package:ocrrub/src/view/widgets/loading_indicator.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../common.dart';
-import 'ocr_view_controller.dart';
+import 'ocr_controller.dart';
 
 class OCRView extends StatefulWidget {
   static const String routeName = '/ocrview';

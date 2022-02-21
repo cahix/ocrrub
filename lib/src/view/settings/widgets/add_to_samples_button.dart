@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ocrrub/src/view/ocr/expected_texts.dart';
-import 'package:ocrrub/src/view/ocr/ocr_view_controller.dart';
+import 'package:ocrrub/src/view/ocr/ocr_controller.dart';
 import 'package:ocrrub/src/view/settings/settings_controller.dart';
 import 'package:ocrrub/src/view/widgets/scaffold_messenger.dart';
 import 'package:provider/src/provider.dart';

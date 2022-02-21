@@ -10,7 +10,6 @@ class NormedTextLine {
   NormedTextLine(this.textLine, this.normalCornerPoints);
 }
 
-
 List<NormedTextLine> getNormalLines(List<TextLine> lines) {
   double maxX = 1.0;
   double maxY = 1.0;
@@ -22,9 +21,6 @@ List<NormedTextLine> getNormalLines(List<TextLine> lines) {
     maxX = max(maxX, max(topRight.dx, bottomRight.dx));
     maxY = max(maxY, max(bottomLeft.dy, bottomRight.dy));
   }
-
-  print("maxX : $maxX");
-  print("maxY : $maxY");
 
   List<NormedTextLine> res = [];
   for(var line in lines) {

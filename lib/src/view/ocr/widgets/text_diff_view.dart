@@ -1,5 +1,6 @@
 import 'package:diff_match_patch/diff_match_patch.dart';
-import 'package:ocrrub/src/view/ocr/ocr_view_controller.dart';
+import 'package:ocrrub/src/view/ocr/csv_writer.dart';
+import 'package:ocrrub/src/view/ocr/ocr_controller.dart';
 import 'package:ocrrub/src/view/ocr/widgets/legend.dart';
 import 'package:ocrrub/src/view/settings/settings_controller.dart';
 import 'package:pretty_diff_text/pretty_diff_text.dart';
@@ -46,9 +47,7 @@ class TextDiffView extends StatelessWidget {
   Widget _buildDiff(BuildContext context) {
     final oldText = context.read<SettingsController>().expectedOCR;
     final newText = context.read<OCRController>().ocrText;
-    final comparison = oldText.similarityTo(newText).toStringAsFixed(5);
-    print('Comp: $comparison');
-    printDiff(oldText, newText);
+    DiffPrinter().writeDiff(context);
     if(newText == null) {
       return Text('No text found');
     } else if (oldText == null) {
@@ -62,18 +61,5 @@ class TextDiffView extends StatelessWidget {
         newText: newText,
       );
     }
-  }
-
-  void printDiff(String? s1, String? s2) {
-    // final int expectedChars = s1?.length ?? 0;
-    int recognizedChars = 0;
-    final diffmatch = diff(s1 ?? '', s2 ?? '');
-    for(var diff in diffmatch) {
-      if(diff.operation == 0) {
-        recognizedChars += diff.text.length;
-      }
-    }
-    print('Recognized Char: $recognizedChars');
-    print('Total Char: ${s2?.length}');
   }
 }

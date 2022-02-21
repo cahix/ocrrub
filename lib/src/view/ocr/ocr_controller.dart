@@ -23,6 +23,7 @@ class OCRController extends SmartChangeNotifier {
   String? ocrText;
   bool isScanning = false;
   OCRNormaliser _ocrNormaliser = OCRNormaliser();
+  RecognisedText? recognisedText;
 
   bool hasImage() => currentImagePath != null;
 
@@ -64,20 +65,15 @@ class OCRController extends SmartChangeNotifier {
   Future<void> _startOCR() async {
     if (currentImagePath == null) return;
     final inputImage = InputImage.fromFilePath(currentImagePath!);
-    final recognisedText = await textDetector.processImage(inputImage);
-    _onTextRecognised(recognisedText);
+    recognisedText = await textDetector.processImage(inputImage);
+    _onTextRecognised(recognisedText!);
   }
 
   void _onTextRecognised(RecognisedText recognisedText) {
     final norm = _ocrNormaliser.normalize(recognisedText);
     final blocks = recognisedText.blocks;
-    print('Blocks:  ${blocks.length}');
     if (blocks.length > 0) {
       _setPaint(recognisedText);
-     // ocrText = recognisedText.text.replaceAll("\n", ' ');
-     //  for (var n in norm) {
-     //    print(n.text + " " + n.cornerPoints[0].toString());
-     //  }
       ocrText = getTextFromLines(norm);
     } else {
       showSnackbar('No text recognized');
