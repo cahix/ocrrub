@@ -8,28 +8,37 @@ import '../settings/settings_controller.dart';
 import 'ocr_controller.dart';
 
 class DiffPrinter {
-
-  void writeDiff(BuildContext context) async {
+  void printDiff(BuildContext context) async {
     final oldText = context.read<SettingsController>().expectedOCR;
     final newText = context.read<OCRController>().ocrText;
     final blocks = context.read<OCRController>().recognisedText?.blocks.length;
 
     final comparison = oldText?.similarityTo(newText).toStringAsFixed(5);
     final recognized = recognizedChars(oldText, newText);
+    final correct = recognized.val1;
+    final errors = recognized.val2;
 
-    print('Soer    | recognized | total | blocks');
-    print('$comparison   $recognized        ${oldText?.length}     $blocks');
-
-    log('$comparison\n$recognized\n${oldText?.length}\n$blocks');
+    log('Soer    | errors | correct | chars(original)  | chars(this)');
+    log('$comparison   $errors        $correct      ${oldText?.length}              ${newText?.length}');
   }
 
-  int recognizedChars(String? oldText, String? newText) {
+  Tuple<int> recognizedChars(String? oldText, String? newText) {
     int recognizedChars = 0;
+    int errors = 0;
     for(var diff in diff(oldText ?? '', newText ?? '')) {
       if(diff.operation == 0) {
         recognizedChars += diff.text.length;
+      } else {
+        errors++;
       }
     }
-    return recognizedChars;
+    return Tuple(recognizedChars, errors);
   }
+}
+
+class Tuple<T>{
+  T? val1;
+  T? val2;
+
+  Tuple(this.val1, this.val2);
 }

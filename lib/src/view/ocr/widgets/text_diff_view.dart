@@ -47,7 +47,7 @@ class TextDiffView extends StatelessWidget {
   Widget _buildDiff(BuildContext context) {
     final oldText = context.read<SettingsController>().expectedOCR;
     final newText = context.read<OCRController>().ocrText;
-    DiffPrinter().writeDiff(context);
+    DiffPrinter().printDiff(context);
     if(newText == null) {
       return Text('No text found');
     } else if (oldText == null) {

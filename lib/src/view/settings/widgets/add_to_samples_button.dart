@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ocrrub/src/view/ocr/expected_texts.dart';
 import 'package:ocrrub/src/view/ocr/ocr_controller.dart';
@@ -22,6 +24,7 @@ class AddToSamplesButton extends StatelessWidget {
     if(ocr == null) {
       return showSnackbar('No OCR found');
     }
+    controller.text = Random().nextInt(1000).toString();
     final name = await showDialog<String?>(
         context: context,
         builder: (context) => AlertDialog(
@@ -32,12 +35,12 @@ class AddToSamplesButton extends StatelessWidget {
           ),
           actions: [
             TextButton(
-                onPressed: () => Navigator.of(context).pop(controller.text),
-                child: Text('Continue', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
-            ),
-            TextButton(
                 onPressed: () => Navigator.of(context).pop(),
                 child: Text('Cancel', style: TextStyle(fontSize: 16))
+            ),
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(controller.text),
+                child: Text('Continue', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),)
             ),
           ],
         ),
