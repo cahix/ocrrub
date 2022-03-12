@@ -1,12 +1,11 @@
-import 'package:diff_match_patch/diff_match_patch.dart';
-import 'package:ocrrub/src/view/ocr/csv_writer.dart';
+
 import 'package:ocrrub/src/view/ocr/ocr_controller.dart';
 import 'package:ocrrub/src/view/ocr/widgets/legend.dart';
 import 'package:ocrrub/src/view/settings/settings_controller.dart';
 import 'package:pretty_diff_text/pretty_diff_text.dart';
-import 'package:string_similarity/string_similarity.dart';
 
 import '../../common.dart';
+import '../diff_printer.dart';
 
 class TextDiffView extends StatelessWidget {
   const TextDiffView({Key? key,}) : super(key: key);

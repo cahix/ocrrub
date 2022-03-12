@@ -1,5 +1,9 @@
 import 'package:google_ml_kit/google_ml_kit.dart';
 
+/// Normalize the recognized text (which is the output of the OCR algorithm).
+/// Order the recognized lines by their coordinates, so the output does not vary
+/// depending on the size of the blocks that have been recognized.
+
 class OCRNormaliser {
   List<TextLine> normalize(RecognisedText recognisedText) {
     List<TextLine> lines = [];

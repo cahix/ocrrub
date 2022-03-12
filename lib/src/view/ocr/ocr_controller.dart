@@ -14,6 +14,12 @@ import 'package:screenshot/screenshot.dart';
 
 import 'widgets/my_painter.dart';
 
+
+///The controller that will do all the OCR Work.
+///Pick an image from gallery, scan an image using the camera.
+///Do OCR on an recognized image, draw the rectangles around the words.
+///Take a screenshot to save a file to the gallery.
+
 class OCRController extends SmartChangeNotifier {
   ScreenshotController screenshotController = ScreenshotController();
   TextDetector textDetector = GoogleMlKit.vision.textDetector();

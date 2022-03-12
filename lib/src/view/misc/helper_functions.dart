@@ -4,6 +4,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 
+///File conversion of an Image
+
 Future<ui.Image> getImageFromPath(String path) async {
   Completer<ui.Image> _completer = new Completer<ui.Image>();
   Image.file(

@@ -1,7 +1,6 @@
-import '../common.dart';
-import 'package:ocrrub/src/view/ocr/ocr_controller.dart';
 import 'package:ocrrub/src/view/settings/settings_view.dart';
 
+import '../common.dart';
 import 'default_scaffold_screenshotbutton.dart';
 
 class DefaultScaffold extends StatelessWidget {

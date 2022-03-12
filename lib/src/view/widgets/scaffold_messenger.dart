@@ -3,6 +3,8 @@ import 'package:pretty_diff_text/pretty_diff_text.dart';
 
 import '../common.dart';
 
+///Used for showing notifications like a Snackbar or Banner
+
 void showMaterialBanner(String title) {
   return _showMaterialBannerInScrollView(Text(title),
       leading: const Icon(Icons.info_outline_rounded));

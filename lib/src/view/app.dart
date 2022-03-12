@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ocrrub/main.dart';
 import 'package:ocrrub/src/view/common.dart';
-import 'package:ocrrub/src/view/ocr/ocr_view.dart';
+import 'package:ocrrub/src/view/ocr/widgets/ocr_view.dart';
 
 import 'settings/settings_view.dart';
 

@@ -7,6 +7,9 @@ import 'package:string_similarity/string_similarity.dart';
 import '../settings/settings_controller.dart';
 import 'ocr_controller.dart';
 
+///Outputs the differences between the recognized and the expected Text to the
+///console. These values can be seen in the tables about errors etc.
+
 class DiffPrinter {
   void printDiff(BuildContext context) async {
     final oldText = context.read<SettingsController>().expectedOCR;
