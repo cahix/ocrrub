@@ -4,7 +4,7 @@ import 'package:ocrrub/src/view/ocr/expected_texts.dart';
 import 'package:ocrrub/src/view/widgets/scaffold_messenger.dart';
 
 class SettingsController with ChangeNotifier {
-  String? _expectedOCR = sampleText;
+  String? _expectedOCR;
 
   String? get expectedOCR => _expectedOCR;
 
